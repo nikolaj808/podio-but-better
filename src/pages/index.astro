@@ -1,0 +1,66 @@
+---
+type Event = {
+  id: number;
+  title: string;
+  description: string;
+  participants: string;
+};
+
+import "@/styles/globals.css";
+
+import Layout from "@/layouts/Layout.astro";
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import { UserAvatar } from "@/components/UserAvatar";
+
+const events: Event[] = [
+  {
+    id: 1,
+    title: "Spis suppe",
+    description: "Vi skal spise så meget suppe",
+    participants: "Søren Sommer, Markus Kristian Simonsen",
+  },
+];
+---
+
+<Layout title="Podio, but better">
+  <main class="flex h-full flex-1 flex-col space-y-8 p-8">
+    <div class="flex items-center justify-between space-y-2">
+      <div>
+        <h2 class="text-2xl font-bold tracking-tight">Welcome!</h2>
+        <p class="text-muted-foreground">Here&apos;s your available events!</p>
+      </div>
+      <div class="flex items-center space-x-2">
+        <UserAvatar />
+      </div>
+    </div>
+    <Table>
+      <TableCaption>A list of available events for the user</TableCaption>
+      <TableHeader>
+        <TableRow>
+          <TableHead>Event name</TableHead>
+          <TableHead>Description</TableHead>
+          <TableHead>Participants</TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        {
+          events.map((event) => (
+            <TableRow key={event.id}>
+              <TableCell>{event.title}</TableCell>
+              <TableCell>{event.description}</TableCell>
+              <TableCell>{event.participants}</TableCell>
+            </TableRow>
+          ))
+        }
+      </TableBody>
+    </Table>
+  </main>
+</Layout>
