@@ -3,31 +3,54 @@ type Event = {
   id: number;
   title: string;
   description: string;
-  participants: string;
+  startTime: Date;
+  endTime: Date;
+  rsvp: Date;
 };
 
 import "@/styles/globals.css";
 
 import Layout from "@/layouts/Layout.astro";
-import {
-  Table,
-  TableBody,
-  TableCaption,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
+import { CalendarPlus } from "lucide-react";
 import { UserAvatar } from "@/components/user-avatar";
 import { Button } from "@/components/ui/button";
 import { ModeToggle } from "@/components/mode-toggle";
+import { EventCard } from "@/components/event-card";
+
+const now = new Date();
 
 const events: Event[] = [
   {
     id: 1,
     title: "Spis suppe",
     description: "Vi skal spise så meget suppe",
-    participants: "Søren Sommer, Markus Kristian Simonsen",
+    startTime: now,
+    endTime: now,
+    rsvp: now,
+  },
+  {
+    id: 2,
+    title: "Lær at binde snørebånd",
+    description: "Vi skal spise så meget suppe",
+    startTime: now,
+    endTime: now,
+    rsvp: now,
+  },
+  {
+    id: 3,
+    title: "Henneberg invitere til at drikke tog",
+    description: "Vi skal spise så meget suppe",
+    startTime: now,
+    endTime: now,
+    rsvp: now,
+  },
+  {
+    id: 4,
+    title: "Ice tea genopfyldning",
+    description: "Vi skal spise så meget suppe",
+    startTime: now,
+    endTime: now,
+    rsvp: now,
   },
 ];
 ---
@@ -36,37 +59,32 @@ const events: Event[] = [
   <main class="flex h-full flex-1 flex-col space-y-8 p-8">
     <div class="flex items-center justify-between space-y-2">
       <div>
-        <h2 class="text-2xl font-bold tracking-tight">Welcome!</h2>
-        <p class="text-muted-foreground mb-2">
-          Here&apos;s your available events!
-        </p>
-        <Button>Create event</Button>
+        <Button>
+          <CalendarPlus className="h-4 w-4 mr-2" />
+           Create event
+        </Button>
       </div>
       <div class="flex items-center space-x-2">
-        <ModeToggle client:only />
-        <UserAvatar />
+        <div>
+          <ModeToggle client:only />
+        </div>
+        <div>
+          <UserAvatar client:only />
+        </div>
       </div>
     </div>
-    <Table>
-      <TableCaption>A list of available events for the user</TableCaption>
-      <TableHeader>
-        <TableRow>
-          <TableHead>Event name</TableHead>
-          <TableHead>Description</TableHead>
-          <TableHead>Participants</TableHead>
-        </TableRow>
-      </TableHeader>
-      <TableBody>
-        {
-          events.map((event) => (
-            <TableRow key={event.id}>
-              <TableCell>{event.title}</TableCell>
-              <TableCell>{event.description}</TableCell>
-              <TableCell>{event.participants}</TableCell>
-            </TableRow>
-          ))
-        }
-      </TableBody>
-    </Table>
+    <div class="space-y-4">
+      {
+        events.map((event) => (
+          <EventCard
+            title={event.title}
+            description={event.description}
+            startTime={event.startTime}
+            endTime={event.endTime}
+            rsvp={event.rsvp}
+          />
+        ))
+      }
+    </div>
   </main>
 </Layout>
