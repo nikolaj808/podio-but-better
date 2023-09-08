@@ -1,0 +1,35 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { getEventById, getEvents } from "@/lib/events";
+import { Calendar } from "lucide-react";
+
+const { id } = Astro.params;
+
+const event = await getEventById(Number(id));
+
+const { name, start, end, rsvp } = event;
+
+const startTime = new Date(start);
+const endTime = new Date(end);
+const rsvpTime = new Date(rsvp);
+---
+
+<Layout title="Event">
+  <div slot="header-title">
+    <h1 transition:name="title" class="text-3xl font-bold">{event?.name}</h1>
+  </div>
+  <div>
+    <span class="flex items-center space-x-2"
+      ><Calendar /><h3 class="text-xl font-semibold">Start</h3>
+      <p>{startTime.toDateString()}</p></span
+    >
+    <span class="flex items-center space-x-2"
+      ><Calendar /><h3 class="text-xl font-semibold">End</h3>
+      <p>{endTime.toDateString()}</p></span
+    >
+    <span class="flex items-center space-x-2"
+      ><Calendar /><h3 class="text-xl font-semibold">RSVP</h3>
+      <p>{rsvpTime.toDateString()}</p></span
+    >
+  </div>
+</Layout>

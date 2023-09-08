@@ -1,54 +1,13 @@
 ---
-type Event = {
-  id: number;
-  title: string;
-  description: string;
-  startTime: Date;
-  endTime: Date;
-  rsvp: Date;
-};
-
 import Layout from "@/layouts/Layout.astro";
 import { CalendarPlus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { EventCard } from "@/components/event-card";
+import { getEvents } from "@/lib/events";
 
-const now = new Date();
+const events = await getEvents();
 
-const events: Event[] = [
-  {
-    id: 1,
-    title: "Spis suppe",
-    description: "Vi skal spise så meget suppe",
-    startTime: now,
-    endTime: now,
-    rsvp: now,
-  },
-  {
-    id: 2,
-    title: "Lær at binde snørebånd",
-    description: "Vi skal spise så meget suppe",
-    startTime: now,
-    endTime: now,
-    rsvp: now,
-  },
-  {
-    id: 3,
-    title: "Henneberg invitere til at drikke tog",
-    description: "Vi skal spise så meget suppe",
-    startTime: now,
-    endTime: now,
-    rsvp: now,
-  },
-  {
-    id: 4,
-    title: "Ice tea genopfyldning",
-    description: "Vi skal spise så meget suppe",
-    startTime: now,
-    endTime: now,
-    rsvp: now,
-  },
-];
+console.log(events);
 ---
 
 <Layout title="Podio, but better">
@@ -60,10 +19,11 @@ const events: Event[] = [
     {
       events.map((event) => (
         <EventCard
-          title={event.title}
+          id={event.id}
+          name={event.name}
           description={event.description}
-          startTime={event.startTime}
-          endTime={event.endTime}
+          start={event.start}
+          end={event.end}
           rsvp={event.rsvp}
         />
       ))
