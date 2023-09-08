@@ -18,8 +18,9 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { UserAvatar } from "@/components/UserAvatar";
+import { UserAvatar } from "@/components/user-avatar";
 import { Button } from "@/components/ui/button";
+import { ModeToggle } from "@/components/mode-toggle";
 
 const events: Event[] = [
   {
@@ -42,6 +43,7 @@ const events: Event[] = [
         <Button>Create event</Button>
       </div>
       <div class="flex items-center space-x-2">
+        <ModeToggle client:only />
         <UserAvatar />
       </div>
     </div>
