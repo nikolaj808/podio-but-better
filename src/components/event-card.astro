@@ -1,0 +1,47 @@
+---
+import { Calendar, Pencil, Trash, UserPlus } from "lucide-react";
+import { Button } from "@/components/ui/button";
+
+interface Props {
+  title: string;
+  startTime: Date;
+  endTime: Date;
+  rsvp: Date;
+}
+
+const { title, startTime, endTime, rsvp } = Astro.props;
+---
+
+<a href="/event" class="flex items-center border-2 rounded-lg p-4">
+  <slot />
+  <div class="ml-4 space-y-1">
+    <p transition:name="title" class="text-sm font-medium leading-none">
+      {title}
+    </p>
+    <p class="flex space-x-2 text-sm text-muted-foreground">
+      <span class="flex items-center">
+        <Calendar className="mr-2 h-4 w-4" />
+        {startTime.toLocaleDateString()}
+      </span>
+      <span class="flex items-center">
+        <Calendar className="mr-2 h-4 w-4" />
+        {endTime.toLocaleDateString()}
+      </span>
+      <span class="flex items-center">
+        <Calendar className="mr-2 h-4 w-4" />
+        {rsvp.toLocaleDateString()}
+      </span>
+    </p>
+  </div>
+  <div class="ml-auto space-x-2">
+    <Button variant="ghost" size="icon">
+      <UserPlus />
+    </Button>
+    <Button variant="ghost" size="icon">
+      <Pencil />
+    </Button>
+    <Button variant="ghost" size="icon">
+      <Trash />
+    </Button>
+  </div>
+</a>

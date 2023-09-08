@@ -17,7 +17,7 @@ export const EventCard = ({
   rsvp,
 }: EventCardProps) => {
   return (
-    <div className="flex items-center border-2 rounded-lg p-4">
+    <a href="/event" className="flex items-center border-2 rounded-lg p-4">
       <Avatar className="h-9 w-9">
         <AvatarImage src="/avatars/01.png" alt="Avatar" />
         <AvatarFallback>OM</AvatarFallback>
@@ -50,6 +50,6 @@ export const EventCard = ({
           <Trash />
         </Button>
       </div>
-    </div>
+    </a>
   );
 };

@@ -8,13 +8,9 @@ type Event = {
   rsvp: Date;
 };
 
-import "@/styles/globals.css";
-
 import Layout from "@/layouts/Layout.astro";
 import { CalendarPlus } from "lucide-react";
-import { UserAvatar } from "@/components/user-avatar";
 import { Button } from "@/components/ui/button";
-import { ModeToggle } from "@/components/mode-toggle";
 import { EventCard } from "@/components/event-card";
 
 const now = new Date();
@@ -56,35 +52,21 @@ const events: Event[] = [
 ---
 
 <Layout title="Podio, but better">
-  <main class="flex h-full flex-1 flex-col space-y-8 p-8">
-    <div class="flex items-center justify-between space-y-2">
-      <div>
-        <Button>
-          <CalendarPlus className="h-4 w-4 mr-2" />
-           Create event
-        </Button>
-      </div>
-      <div class="flex items-center space-x-2">
-        <div>
-          <ModeToggle client:only />
-        </div>
-        <div>
-          <UserAvatar client:only />
-        </div>
-      </div>
-    </div>
-    <div class="space-y-4">
-      {
-        events.map((event) => (
-          <EventCard
-            title={event.title}
-            description={event.description}
-            startTime={event.startTime}
-            endTime={event.endTime}
-            rsvp={event.rsvp}
-          />
-        ))
-      }
-    </div>
-  </main>
+  <Button slot="header-title" transition:name="title">
+    <CalendarPlus className="h-4 w-4 mr-2" />
+     Create event
+  </Button>
+  <div class="space-y-4">
+    {
+      events.map((event) => (
+        <EventCard
+          title={event.title}
+          description={event.description}
+          startTime={event.startTime}
+          endTime={event.endTime}
+          rsvp={event.rsvp}
+        />
+      ))
+    }
+  </div>
 </Layout>
